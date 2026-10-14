@@ -205,7 +205,7 @@ The learned value baseline is **not** bootstrapped, so this notebook is still pu
 
 - TD error: $\delta_t = r_t + \gamma(1-d_t)V_\phi(s_{t+1}) - V_\phi(s_t)$
 - GAE recursion: $\hat A_t = \delta_t + \gamma\lambda(1-d_t)\hat A_{t+1}$
-- Critic target: the λ-return $\operatorname{stopgrad}(\hat A_t + V_\phi(s_t))$
+- Critic target: the λ-return $\mathrm{stopgrad}(\hat A_t + V_\phi(s_t))$
 - Actor loss: policy gradient plus an entropy bonus. Updates are **unclipped**; clipping is introduced in notebook 04.
 
 The notebook compares **λ ∈ {0, 0.5, 0.95, 1.0}**. Rollouts use a continuing stream of auto-resetting environments. A segment that is truncated while still running bootstraps from its last state; a true termination never bootstraps.
@@ -221,7 +221,7 @@ The notebook compares **λ ∈ {0, 0.5, 0.95, 1.0}**. Rollouts use a continuing 
 **Goal:** implement clipped PPO from scratch, getting every detail right.
 
 $$
-L^{\text{CLIP}}(\theta)=\mathbb E\big[\min(r_t\hat A_t,\ \operatorname{clip}(r_t,1-\epsilon,1+\epsilon)\hat A_t)\big],\qquad
+L^{\text{CLIP}}(\theta)=\mathbb E\big[\min(r_t\hat A_t,\ \mathrm{clip}(r_t,1-\epsilon,1+\epsilon)\hat A_t)\big],\qquad
 \mathcal L=-L^{\text{CLIP}}+c_vL_V-c_e\mathcal H
 $$
 
